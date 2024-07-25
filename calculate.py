@@ -33,7 +33,7 @@ courses = []
 for row in table.find("tbody").find_all("tr"):
     columns = row.find_all("td")
     if len(columns) < 7:
-        continue  # Skip rows that do not have enough columns
+        continue  
     try:
         code = columns[0].get_text(strip=True)
         name = columns[1].get_text(strip=True)
