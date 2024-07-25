@@ -92,17 +92,18 @@ try:
 
     # Wait for the table with the class "table table-striped col-md-12" on the courses page
     logging.info("Waiting for the courses page to load and checking for the table.")
-    WebDriverWait(driver, 10).until(
+    table_element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, ".table.table-striped.col-md-12"))
     )
     logging.info("Courses page loaded and table found.")
     
-    page_source = driver.page_source
+    # Extract the HTML of the table
+    table_html = table_element.get_attribute('outerHTML')
 
-    # Save the HTML content to a file
-    with open("full_courses_page.html", "w", encoding="utf-8") as file:
-        file.write(page_source)
-    logging.info("Page saved as full_courses_page.html.")
+    # Save the table HTML to a file
+    with open("courses_table.html", "w", encoding="utf-8") as file:
+        file.write(table_html)
+    logging.info("Table HTML saved as courses_table.html.")
 
 finally:
     # Clean up
